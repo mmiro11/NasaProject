@@ -1,0 +1,238 @@
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title></title>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="css/grayscale.min.css" rel="stylesheet">
+	
+	 <style>
+      #mappp {
+        height: 80%; <!-- sistemare il problema riguardo alla mappa che va troppo sotto IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+      }
+	  
+    </style>
+	
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+                    <i class="fa fa-th-large"></i> Yeti <span class="light" style="text-transform: lowercase;">inc.</span>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Maps</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">Download</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Team</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading"> Yeti <span class="light" style="text-transform: lowercase;">inc.</span> </h1>
+                        <p class="intro-text">Scroll down to view landslide and avalanche map.
+                            <br></p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+	
+    <section id="about">
+	<br><br><br><br><div class="text-center"><h2>Map</h2></div>
+	<div id="mappp"></div>
+    <script>
+      var map;
+	  
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('mappp'), {
+          zoom: 2, 
+          center: {lat:  30.402513, lng: 0.224107},
+          mapTypeId: 'terrain'
+        });
+
+		
+		map.addListener('click', function(e) {
+	  var latee = e.latLng.lat();
+	  var lonee = e.latLng.lng();
+	  
+	  var latlng = new google.maps.LatLng(latee, lonee);
+	  
+	  map.setCenter(latlng);
+	  map.setZoom(3); });
+
+        var script = document.createElement('script');
+        script.src = 'prv.json';
+        document.getElementsByTagName('head')[0].appendChild(script);
+        map.data.setStyle(function(feature) {
+          var magnitude = feature.getProperty('mag');
+          return {
+            icon: getCircle(magnitude)
+          };
+        });
+      }
+
+      function getCircle(magnitude) {
+        return {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: 'red',
+          fillOpacity: .6,
+          scale: Math.pow(2, magnitude) / 2,
+          strokeColor: 'white',
+          strokeWeight: .10
+        };
+      }
+
+      function eqfeed_callback(results) {
+        map.data.addGeoJson(results);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&callback=initMap&libraries=weather&sensor=false">
+    </script>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download">
+        <div class="download-section">
+            <div class="container">
+                    <div class="text-center"><h2>Download Yeti</h2></div>
+                    <div class="text-center"><p>You can download Yeti for free on the Apple Store or Google Play.</p></div>
+                    <div class="text-center"><a href="#" class="btn btn-default btn-lg">Download</a></div>
+                </div>
+    
+        </div>
+    </section>
+ <br>
+ <!-- team aggiungere i team etc. IMPORTANTEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE -->
+    <!-- Contact Section -->
+    <section id="contact" class="content-section text-center">
+	<div class="container">
+	<h2>Team</h2><br><br><br><br><br><br><br>
+        <div class="row">
+            <div class="row">                              
+                    <div class="col-md-3">
+                        <div class="card card-user">
+                            <div class="content">
+                                <div class="author">
+                                     <a href="#">
+                                      <h4 class="title">Miro<br />
+                                         <small>miro.1998@live.it</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					 <div class="col-md-3">
+                        <div class="card card-user">
+                            <div class="content">
+                                <div class="author">
+                                     <a href="#">
+                                   
+
+                                      <h4 class="title">Aleksa<br />
+                                         <small>tigrealex2011@libeo.it</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					 <div class="col-md-3">
+                        <div class="card card-user">
+                            <div class="content">
+                                <div class="author">
+                                     <a href="#">
+                                   
+
+                                      <h4 class="title">Miki<br />
+                                         <small>m.nacucchi@gmail.com</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                             
+                            </div>
+                        </div>
+                    </div>
+					 <div class="col-md-3">
+                        <div class="card card-user">
+                            <div class="content">
+                                <div class="author">
+                                     <a href="#">
+                                   
+                                      <h4 class="title">Enrico<br />
+                                         <small>Goleman.Pistola@gmail.com</small>
+                                      </h4>
+                                    </a>
+                                </div>
+                                <p class="description text-center"><br><br><br><br>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+			   </div>
+            </div>
+        </div>
+      
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Yeti inc. 2017</p>
+        </div>
+    </footer>
+    <script src="vendor/jquery/jquery.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+    <script src="js/grayscale.min.js"></script>
+
+</body>
+
+</html>
